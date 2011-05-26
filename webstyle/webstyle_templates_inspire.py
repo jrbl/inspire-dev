@@ -128,6 +128,9 @@ template function generated it.
  <link rel="alternate" type="application/rss+xml" title="%(sitename)s RSS" href="%(rssurl)s" />
  <link rel="search" type="application/opensearchdescription+xml" href="%(siteurl)s/opensearchdescription" title="%(sitename)s" />
  <link rel="unapi-server" type="application/xml" title="unAPI" href="%(unAPIurl)s" />
+ <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+ <link rel="shortcut icon" href="/img/favicon.ico" />
+ <link rel="icon" type="image/png" href="favicon.png" />
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  <meta http-equiv="Content-Language" content="%(ln)s" />
  <meta name="description" content="%(description)s" />
