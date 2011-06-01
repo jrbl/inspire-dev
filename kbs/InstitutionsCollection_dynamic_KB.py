@@ -10,10 +10,10 @@ from invenio import bibknowledge
 kbname = 'InstitutionsCollection'
 collection = 'Institutions'
 display_field = '110__u'
-search_field = '371__a:*%* | 110__u:*%*'
-kbdesc = "A dynamic KB which searches all 371a and 110u fields in the " +\
-         "institutions collection, and returns those records' corresponding " + \
-         "110u fields."
+search_field = '371__a:*%* | 410__a:*%* | 410__g:*%* | 110__u:*%* AND NOT 510__w:b'
+kbdesc = "A dynamic KB which searches all 371a, 410a, 410g and 110u fields in " +\
+         "the institutions collection, and returns those records' " +\
+         "corresponding 110u fields."
 
 
 if __name__ == "__main__":

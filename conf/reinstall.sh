@@ -107,7 +107,7 @@ fi
 
 # give user a chance to quit, if it actually makes sense to do so:
 if [ $CLEAN_INSTALL == "TRUE" ]; then
-    warn_and_wait "[INFO] GOING TO DESTROY YOUR INSPIRE DEMO SITE IN VERY FEW SECONDS!\n[INFO] THIS IS YOUR LAST CHANCE TO INTERRUP BY PRESSING Ctrl-C!\n" 
+    warn_and_wait "[INFO] GOING TO DESTROY YOUR INSPIRE DEMO SITE IN VERY FEW SECONDS!\n[INFO] THIS IS YOUR LAST CHANCE TO INTERRUPT BY PRESSING Ctrl-C!\n" 
 fi
 
 sudo -v; 
@@ -121,9 +121,11 @@ if [ $CLEAN_INSTALL == "TRUE" ]; then
     warn_and_remove_untracked_files
     say "** REGENERATING BUILD CONFIGURATION..."
     aclocal && automake -a -c && autoconf -f && ./configure $CONFIGURE_OPTS  0</dev/null 
+    ctags -R
     cd $INSPIRE_REPO
     warn_and_remove_untracked_files
     cp $CFG_INSPIRE_DIR/config-local.mk .
+    ctags -R
 fi
  
 cd $INVENIO_REPO
