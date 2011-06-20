@@ -22,12 +22,11 @@ __revision__ = \
     "$Id$"
 
 import cgi
-import time
-import cgi
-import string
-import re
 import locale
-
+import re
+import string
+import time
+from urllib import quote
 
 from invenio.config import \
      CFG_SITE_LANG, \
@@ -62,15 +61,6 @@ from invenio.config import \
 from invenio.dbquery import run_sql
 from invenio.messages import gettext_set_language
 from invenio.urlutils import make_canonical_urlargd, drop_default_urlargd, create_html_link, create_url
-#from invenio.htmlutils import nmtoken_from_string
-#from invenio.webinterface_handler import wash_urlargd
-#from invenio.bibrank_citation_searcher import get_cited_by_count
-#from invenio.intbitset import intbitset
-#from invenio.websearch_externacollections import external_collection_get_state, get_external_collection_engine
-#from invenio.websearch_external_collections_utils import get_collection_id
-#from invenio.websearch_external_collections_config import CFG_EXTERNAL_COLLECTION_MAXRESULTS
-
-
 from invenio.messages import gettext_set_language
 from invenio.dateutils import convert_datestruct_to_dategui, \
      convert_datecvs_to_datestruct
@@ -262,8 +252,54 @@ class Template(DefaultTemplate):
 
 
 
-    def tmpl_searchfor_easy(self, ln, collection_id, collection_name, record_count,
-                            searchoptions, sortoptions, rankoptions, displayoptions, formatoptions):
+    def tmpl_citesummary_prologue(self, d_total_recs, l_colls, searchpattern, searchfield, ln=CFG_SITE_LANG):
+        """HTML citesummary format, prologue. A part of HCS format suite."""
+        _ = gettext_set_language(ln)
+        out = ''
+        no_rpp_url = CFG_SITE_URL + '/search?p='
+        p = ''
+        if searchpattern:
+            p = searchpattern
+            if searchfield:
+                if " " in searchpattern:
+                    p = searchfield + ':"' + searchpattern + '"'
+                else:
+                    p = searchfield + ':' + searchpattern
+        no_rpp = p + ' not t rpp'
+        no_rpp_url += quote(no_rpp) + '&of=hcs'
+        out += 'Remove PDG Review from <a href=%s>analysis</a><br/>' % no_rpp_url
+        out += """<p><table id="citesummary">
+                  <tr><td><strong class="headline">%(msg_title)s</strong></td>""" % \
+               {'msg_title': _("Citation summary results"), }
+        for coll, colldef in l_colls:
+            out += '<td align="right">%s</td>' % coll
+        out += '</tr>'
+        out += """<tr><td><strong>%(msg_recs)s</strong></td>""" % \
+               {'msg_recs': _("Total number of citable papers analyzed:"), }
+
+        link_url = CFG_SITE_URL + '/search?p='
+        if p:
+            link_url += quote(p)
+        for coll, colldef in l_colls:
+            if colldef:
+                link_url += '%20AND%20' + quote(colldef)
+            link_text = self.tmpl_nice_number(d_total_recs[coll], ln)
+            out += '<td align="right"><a href="%s">%s</a></td>' % (link_url, link_text)
+        out += '</tr>'
+        return out
+
+    def tmpl_searchfor_easy(self,
+                                ln, # current language
+                                collection_id,
+                                collection_name,
+                                record_count,
+                                middle_option_1, middle_option_2, middle_option_3,
+                                searchoptions,
+                                sortoptions,
+                                rankoptions,
+                                displayoptions,
+                                formatoptions
+                                ):
         """
           Produces SPIRES-style easy search box.
 
