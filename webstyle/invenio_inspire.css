@@ -2711,7 +2711,7 @@ td.tips-rhs {
 .form_label_required {
     font-weight: normal;
     font-size: small;
-    color: red;
+    color: #369;
 }
 .form_label_optional {
     font-weight: normal;
@@ -2740,4 +2740,91 @@ td.tips-rhs {
     font-weight: bold;
     margin: 5px 10px;
 }
+
+div.user_form{
+    border-bottom: 2px solid #ccc;
+    margin-top:10px;
+    margin-bottom: 5px;
+    padding:10px;
+}
+
+.user_form .left{
+    text-align:right;
+}
+
+.user_form .right{
+    text-align:left;
+}
+
+.user_form table{
+    border-collapse:collapse;
+    cell-spacing:0;
+    cell-padding:4px;
+}
+
+.user_form td{
+    padding:3px;
+}
+
+/* bfe_INSPIRE_thesis_form */
+#thesis_upload_box {
+    float: left;
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+    background-color: #a6f145;
+    clear: both;
+    text-align: center;
+    -moz-border-radius: 8px 8px 8px 8px;
+}
+
+.input_inherit_font input {
+    font-family:inherit;
+    font-size:inherit;
+}
+.input_inherit_font select {
+    font-family:inherit;
+    font-size:inherit;
+}
+.input_inherit_font textarea {
+    font-family:inherit;
+    font-size:inherit;
+}
+
+#file_upload td{
+    padding:10px;
+}
+
+tr#file_upload{
+    background:#fc9;
+    border:1px solid #369;
+}
+
+.prefill #realname {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.file_upload_note_p p{
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.tiny_text {
+    font-size: x-small;
+}
+
+.big_text {
+    font-size: large;
+}
+
+.formbutton_strong {
+    font-size: large;
+    color: #252525;
+}
+
+.prefill_default_text {
+    color: gray;
+}
+
 /* end of inspire.css */

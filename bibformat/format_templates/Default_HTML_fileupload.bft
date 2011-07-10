@@ -1,0 +1,108 @@
+<name>Default HTML File Upload</name><description>For uploading of
+fulltext files</description>
+
+<head>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/redmond/jquery-ui.css" />
+<script type="text/javascript">
+
+window.onload = function() {
+    prefill_boxes();
+    $('#username').width(520);
+    $('#realname').width(520);
+    $('#usercomment').width(520);
+}
+
+function prefill_boxes() {
+    /* Find all of the boxes with class 'prefill' having attribute 'prefill=...
+       and set their value to be the prefill.  Then add handlers to them:
+       on focus, check whether value = prefill and blank it if it is;
+       on focus lost, check whether value = blank and set to prefill if it is
+     */
+     var i, to_fill;
+     i = 0;
+     to_fill = document.getElementsByClassName('prefill');
+     for (i = 0; i < to_fill.length; i++) {
+
+        to_fill[i].value = to_fill[i].getAttribute('prefill');
+        function blank_prefill_on_focus(e) { 
+            if (this.value === this.getAttribute('prefill')) {
+                this.value = '';
+                this.classList.toggle('prefill_default_text')
+            }
+        }
+        function prefill_blank_on_blur(e) {
+            if (this.value === '') {
+                this.value = this.getAttribute('prefill');
+                this.classList.toggle('prefill_default_text')
+            }
+        }
+
+        to_fill[i].onblur = prefill_blank_on_blur;
+        to_fill[i].onfocus = blank_prefill_on_focus;
+     }
+}
+
+function changec(){
+
+    function email_valid_p() {
+        // test if valid email address, must have @ and .
+        var checkStr = document.getElementById('username').value;
+        var checkEmail = "@.";
+        var EmailAt = false;
+        var EmailPeriod = false;
+        var ch = '';
+        for (i = 0;  i < checkStr.length;  i++) {
+            ch = checkStr.charAt(i);
+            for (j = 0;  j < checkEmail.length;  j++) {
+                if (ch == checkEmail.charAt(j) && ch == "@")
+                    EmailAt = true;
+                if (ch == checkEmail.charAt(j) && ch == ".")
+                    EmailPeriod = true;
+                if (EmailAt && EmailPeriod)
+                    break;
+            }
+            // if both the @ and . were in the string
+        }
+        return (EmailAt && EmailPeriod);
+    }
+    document.fulltext_upload.filename.value = document.getElementById('filedata').value;
+    if (!email_valid_p()) {
+        alert("The \"email\" field must not be empty, and must contain an \"@\" and a \".\".");
+        document.fulltext_upload.username.focus();
+        return false;
+    }
+}
+
+</script>
+</head>
+
+
+<div id="detailedrecordshortreminder">
+ <BFE_OUTPUT_FORMAT of="hs">
+</div>
+
+
+
+
+<div class="user_form">
+ <BFE_INSPIRE_thesis_form onsubmit="return changec();">
+</div>
+
+
+<div class="note" id="file_upload_note">
+ <p class="file_upload_note_p">
+  We are currently accepting fulltext files for Theses.  Your file
+  should be PDF, and less than 100Mb.  Only submissions from the author are
+  currently accepted.
+ </p>
+ <p class="file_upload_note_p">
+  Note that your file will not be visible until an editor has verified it. We will let you know if there is a
+  problem.
+ </p>
+ <p class="file_upload_note_p">
+  Please contact us at <a href="mailto:<BFE_SERVER_INFO var=CFG_SITE_SUPPORT_EMAIL>">
+  <BFE_SERVER_INFO var="CFG_SITE_SUPPORT_EMAIL"></a> if you have questions. 
+ </p>
+</div>
+
