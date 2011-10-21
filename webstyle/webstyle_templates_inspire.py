@@ -152,19 +152,17 @@ template function generated it.
   <td align="left">
     <div>
       <a class="img" href="%(siteurl)s?ln=%(ln)s">
-       <img border="0" src="%(cssurl)s/img/inspire_logo_beta.png" alt="INSPIRE"
+       <img border="0" src="%(cssurl)s/img/inspire_logo_hep.png" alt="INSPIRE"
  />
       </a>
     </div>
   </td>
   <td  class="feedbackbox">
    <div class="feedbackboxbody">
-Welcome to <a href="http://www.projecthepinspire.net">INSPIRE</a> β: the
-upgrade of SPIRES<br />
-We now recommend that you use this site instead of SPIRES<br />
-
-
-    %(feedback)s
+Welcome to <a href="http://www.projecthepinspire.net">INSPIRE</a>!
+INSPIRE is out of beta and ready to replace SPIRES.  SPIRES will be
+switched off soon.  If you have questions, comments or concerns, please
+email us at <a href="mailto:feedback@inspirehep.net">feedback@inspirehep.net</a>.
    </div>
   </td>
  </tr>
@@ -260,7 +258,7 @@ We now recommend that you use this site instead of SPIRES<br />
         </div>
         </div>""" % {
             'feedback_text' : _("Please send feedback on INSPIRE to"),
-            'feedback_address' : 'feedback@inspirebeta.net',
+            'feedback_address' : 'feedback@inspirehep.net',
             }
         return out
 
@@ -323,7 +321,7 @@ We now recommend that you use this site instead of SPIRES<br />
           'langlink': '?ln=' + ln,
 
           'sitename' : CFG_SITE_NAME_INTL.get(ln, CFG_SITE_NAME),
-          'sitesupportemail' : 'feedback@inspirebeta.net',
+          'sitesupportemail' : 'feedback@inspirehep.net',
 
           'msg_search' : _("Search"),
           'msg_help' : _("Help"),
