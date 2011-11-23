@@ -63,10 +63,16 @@ def format_element(bfo, style='eu', markup = 'html', separator = ', '):
             else:
                 if latex_p:
                     journal_source = journal_source.replace(".",'.\\ ')
+                    # but some journal names end in '.', and subsequent steps
+                    # assume we do not end with '\ ', so take it off:
+                    if journal_source[-2:] == '\ ':
+                        journal_source = journal_source[:-2]
                 out += journal_source
 
             if volume:       # preparing volume and appending it
-                if latex_p:
+                if latex_p and not journal_source == 'Conf.Proc.':
+                    # XXX: Special case for Conference Proceedings, which have
+                    #      letters in their conf #, but no volumes
                     char_i = 0
                     for char in volume:
                         if char.isalpha():
@@ -74,6 +80,8 @@ def format_element(bfo, style='eu', markup = 'html', separator = ', '):
                         else:
                             break
                     journal_letter = volume[:char_i]
+                    if journal_letter:
+                        journal_letter = '\\ ' + journal_letter
                     volume_number = volume[char_i:]
                     out += journal_letter + '\\ {\\bf ' + volume_number + '}'
                 else:

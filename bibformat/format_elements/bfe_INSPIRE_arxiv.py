@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 ##
-## $Id$
-##
 ## This file is part of Invenio.
 ## Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 CERN.
 ##
@@ -18,9 +16,8 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Invenio; if not, write to the Free Software Foundation, Inc.,
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
-"""BibFormat element - Links record to arXiv metadata, whenever possible
-"""
-__revision__ = "$Id$"
+"""BibFormat element - Links record to arXiv metadata, whenever possible"""
+
 
 def format_element(bfo, links="no", category="yes", mirrors="yes"):
     """
@@ -29,7 +26,6 @@ def format_element(bfo, links="no", category="yes", mirrors="yes"):
     @param links yes->display links to arXiv only no(default)-> display value of arxiv number only
     @param category -> displays category in '[]' after number (only if not redundant)
     @param mirrors -> defautl yes  only relevant if links=yes
-
     """
 
     arxiv=get_arxiv(bfo, category="no")
