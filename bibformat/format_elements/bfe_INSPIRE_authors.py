@@ -127,7 +127,6 @@ def format_element(bfo, limit, separator='; ',
                                         first_last_match.group('last') + \
                                         first_last_match.group('extension')
 
-
             if print_links.lower() == "yes":
 
                 # if there is an ID, search using that.
